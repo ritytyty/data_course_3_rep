@@ -16,8 +16,15 @@ general_layout = html.Div(
         ),
         dcc.Graph(id='graph-content'),
 
-    
-        dcc.Dropdown(['1','2'],'2'),
+   
+        dcc.Dropdown(
+        id='dropdown-selection_2',
+        options=[
+            {'label': 'Динамика ТН по дням', 'value': '1'},
+            {'label': 'Динамика изменения цены', 'value': '2'}
+        ],
+        placeholder='Выберете тип графика' # Установить значение в пустом поле
+        ),
   
         dcc.Graph(id='r-content'),
        
