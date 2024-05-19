@@ -1,6 +1,8 @@
 from dash import html, dcc
-
+import dash_bootstrap_components as dbc
+import plotly.graph_objects as go
 from data import daily_sales_date, daily_sales, prices_avg
+
 from figures import line_graph
 
 
@@ -11,10 +13,20 @@ general_layout = html.Div(
             style={"textAlign": "center"},
         ),
         dcc.Graph(figure=line_graph),
-        dcc.Dropdown(
-            daily_sales.date.unique(), "2024-04-30", id="dropdown-selection"
-        ),
+        
+        dbc.DropdownMenu(
+        id='dropdown-selection',
+        label='Выберите дату',
+        children=[
+            dbc.DropdownMenuItem(date, id= 'dropdown-selection-item')
+            for  date in daily_sales.date.unique()
+        ],
+    ),    
         dcc.Graph(id='graph-content'),
+        #dcc.Dropdown(
+        #    daily_sales.date.unique(), "2024-04-30", id="dropdown-selection"
+        #),
+        #dcc.Graph(id='graph-content'),
 
    
         dcc.Dropdown(
@@ -32,3 +44,6 @@ general_layout = html.Div(
     ],
     style={"margin-left": "80px", "margin-right": "80px"},
 )
+
+
+

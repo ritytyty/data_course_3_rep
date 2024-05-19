@@ -26,8 +26,7 @@ daily_sales['revenue'] = daily_sales['sales']  - daily_sales['cost']
 
 #Преобразую дату в красивый вид
 daily_sales['date'] = daily_sales['date'].apply(lambda x: str(x)[:10])
-
-#Для первого графика (динамика продаж в руб.) делаю фрейм с суммой продаж по дням
+ #Для первого графика (динамика продаж в руб.) делаю фрейм с суммой продаж по дням
 daily_sales_date = daily_sales.groupby('date').agg(sum_sales =('sales' ,'sum'), 
                                                    sum_cost =('cost' ,'sum'),
                                                    sum_revenue =('revenue' ,'sum')
@@ -45,4 +44,6 @@ prices_avg['price_delta'] = prices_avg['avg_price'] - prices_avg['old_price']
 prices_avg.dropna()
 
 #prices_avg['date'] = prices_avg['date'].apply(lambda x: str(x)[:10])
+#print(daily_sales_date['sum_sales'].loc[daily_sales_date['date']=='2024-04-30'])
+
  
