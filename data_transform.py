@@ -18,7 +18,6 @@ daily_sales_date = (
     )
     .reset_index()
 )
-
 #Для третьего рассчитываю ТН,%
 daily_sales_date['tn'] = 100 * (daily_sales_date['sum_revenue'] / daily_sales_date['sum_cost'])
  

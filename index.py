@@ -38,37 +38,43 @@ def update_graph(value):
     item_bar.update_layout(title=title, barmode = 'group')  
     return item_bar
 
-#@callback(
-#    Output('output-graph', 'figure'),
-#    Input('tn-dynamic', 'n_clicks'),
-#    Input('price-dynamic', 'n_clicks'),
-#)
-#def update_button_param(btn1_clicks, btn2_clicks):
-#    button_id = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else None
-#    if button_id == 'tn-dynamic':   
-#        print(button_id)    
-#        df_tn = daily_sales_date              
-#        bar_fig =  px.bar(df_tn, 
-#                         x = 'date', 
-#                         y ='tn', 
-#                         #title = 'Себестоимость по позиции, руб. в разрезе дней', 
-#                         labels={'tn':'Торговая надбавка, %.'},
-#                         #text = df_tn['tn'].apply(lambda x: f'{x:.0f} %')
-#                         ) 
-#        return bar_fig
-#        
-#    elif button_id =='price-dynamic':
-#        print(button_id)   
-#        df_price = prices_avg
-#        bar_fig =  px.bar(df_price, 
-#                     x = 'date', 
-#                     y='price_delta', 
-#                     color = 'price_delta',
-#                     #title = 'Себестоимость по позиции, руб. в разрезе дней', 
-#                     labels={'price_delta':'Изменение цены, руб.'}
-#                     #text = df_price['price_delta'].apply(lambda x: f'{x:.2f} руб')
-#                     )
-#        return bar_fig
+@callback(
+    Output('output-graph', 'figure'),
+    Input('tn-dynamic', 'n_clicks'),
+    Input('price-dynamic', 'n_clicks'),
+)
+def update_button_param(btn1_clicks, btn2_clicks):
+    button_id = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else None
+    if button_id == 'tn-dynamic':   
+        print(button_id)    
+        df_tn = daily_sales_date     
+        bar_fig = go.Figure()         
+        bar_fig.add_trace(go.Bar( 
+                         x = df_tn['date'], 
+                         y =df_tn['tn'], 
+                         #title = 'Себестоимость по позиции, руб. в разрезе дней', 
+                         #labels={'tn':'Торговая надбавка, %.'},
+                         #text = df_tn['tn'].apply(lambda x: f'{x:.0f} %')
+                         ))
+        bar_fig.update_layout(title="Динамика изменения ТН, %", barmode = 'group')  
+        #print (df_tn)
+        return bar_fig
+        
+    elif button_id =='price-dynamic':
+        print(button_id)   
+        df_price = prices_avg
+        bar_fig = go.Figure()   
+        bar_fig.add_trace(go.Bar(
+                     x = df_price['date'], 
+                     y=df_price['price_delta'], 
+                     #color = 'price_delta',
+                     #title = 'Себестоимость по позиции, руб. в разрезе дней', 
+                     #labels={'price_delta':'Изменение цены, руб.'}
+                     #text = df_price['price_delta'].apply(lambda x: f'{x:.2f} руб')
+                     ))
+        #print (df_price)
+        bar_fig.update_layout(title="Динамика изменения цены, %", barmode = 'group')  
+        return bar_fig
  
 
    # button_id = ctx.triggered[0]['prop_id'].split('.')[0]
