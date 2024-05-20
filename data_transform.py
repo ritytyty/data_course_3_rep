@@ -46,8 +46,5 @@ daily_sales['day_sumqty'] = daily_sales['start_sumqty'] + daily_sales['sum_day_s
 
 sumqty_df = daily_sales.groupby('date').agg(sum_qty_day = ('day_sumqty', 'sum')).reset_index().sort_values(by='date')
 sumqty_df['old_sumqty'] = sumqty_df['sum_qty_day'].shift(1)
-print (sumqty_df)
-#prices_avg['date'] = prices_avg['date'].apply(lambda x: str(x)[:10])
-#print(daily_sales_date['sum_sales'].loc[daily_sales_date['date']=='2024-04-30'])
 
- 
+
