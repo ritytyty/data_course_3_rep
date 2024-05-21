@@ -3,13 +3,16 @@ import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 from data_transform import daily_sales_date, daily_sales, prices_avg
 
+#from figures import line_graph
 from figures import line_graph, tn_indicator, sumqty_indicator
+
+
 
 
 general_layout = html.Div(
     [
         html.H1(
-            children="Daily sales",
+            children = "Daily sales",
             style={"textAlign": "center"},
         ),
         dcc.Graph(figure=line_graph),
@@ -35,10 +38,11 @@ general_layout = html.Div(
         #    daily_sales.date.unique(), "2024-04-30", id="dropdown-selection"
         #),
         #dcc.Graph(id='graph-content'),
+        
         dbc.Button('Вывести динамику ТН по дням', id = 'tn-dynamic' ,color='primary', n_clicks=0),
         dbc.Button('Вывести динамику изменения цены', id = 'price-dynamic', color='primary',n_clicks=0),
-   
-        dcc.Graph(id='output-graph'),
+       
+        dcc.Graph(id='output-graph')
 
         #dcc.Dropdown(
         #id='dropdown-selection_2',

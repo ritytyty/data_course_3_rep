@@ -42,40 +42,45 @@ def update_graph(value):
     Output('output-graph', 'figure'),
     Input('tn-dynamic', 'n_clicks'),
     Input('price-dynamic', 'n_clicks'),
+    prevent_initial_call=True
+
 )
 def update_button_param(btn1_clicks, btn2_clicks):
     button_id = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else None
+    bar_fig = go.Figure()  
     if button_id == 'tn-dynamic':   
-        print(button_id)    
         df_tn = daily_sales_date     
-        bar_fig = go.Figure()         
+        #bar_fig = go.Figure()         
         bar_fig.add_trace(go.Bar( 
                          x = df_tn['date'], 
-                         y =df_tn['tn'], 
+                         y =df_tn['tn']
                          #title = 'Себестоимость по позиции, руб. в разрезе дней', 
                          #labels={'tn':'Торговая надбавка, %.'},
                          #text = df_tn['tn'].apply(lambda x: f'{x:.0f} %')
                          ))
-        bar_fig.update_layout(title="Динамика изменения ТН, %", barmode = 'group')  
+        bar_fig.update_layout(title="Динамика изменения ТН, %") 
         #print (df_tn)
+
         return bar_fig
         
     elif button_id =='price-dynamic':
-        print(button_id)   
         df_price = prices_avg
-        bar_fig = go.Figure()   
+        #bar_fig = go.Figure()   
         bar_fig.add_trace(go.Bar(
                      x = df_price['date'], 
-                     y=df_price['price_delta'], 
+                     y = df_price['price_delta'] 
                      #color = 'price_delta',
                      #title = 'Себестоимость по позиции, руб. в разрезе дней', 
                      #labels={'price_delta':'Изменение цены, руб.'}
                      #text = df_price['price_delta'].apply(lambda x: f'{x:.2f} руб')
                      ))
-        #print (df_price)
-        bar_fig.update_layout(title="Динамика изменения цены, %", barmode = 'group')  
+       # print (df_price)
+        bar_fig.update_layout(title="Динамика изменения цены, %")  
         return bar_fig
  
+if __name__ == '__main__':
+    app.run(debug = True) 
+
 
    # button_id = ctx.triggered[0]['prop_id'].split('.')[0]
  #  if button_id == 'tn-dynamic':
@@ -152,9 +157,6 @@ def update_button_param(btn1_clicks, btn2_clicks):
 #                    #text = df_price['price_delta'].apply(lambda x: f'{x:.2f} руб')
 #                    )
 #        return bar_fig
-
-if __name__ == '__main__':
-    app.run(debug=True) 
 
 
 

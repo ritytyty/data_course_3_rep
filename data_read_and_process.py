@@ -18,4 +18,4 @@ daily_sales = daily_sales.merge(products, on=['sku'], how ='inner')
 
 #Преобразую дату в красивый вид
 daily_sales['date'] = daily_sales['date'].apply(lambda x: str(x)[:10])
-
+ 
